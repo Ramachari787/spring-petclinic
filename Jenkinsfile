@@ -1,5 +1,5 @@
 #!groovy
-pipeline {
+/*pipeline {
 	agent none
   stages {
   	stage('Maven Install') {
@@ -13,4 +13,7 @@ pipeline {
       }
     }
   }
-}
+} */
+
+
+sh "docker"
