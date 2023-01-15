@@ -8,6 +8,9 @@ pipeline {
 
 stages {
                         stage('Prepare Docker') {
+                            agent {
+                                label "docker && linux"
+                            }
                             steps {
                                 sh '''
                                 //docker buildx create --use
