@@ -1,22 +1,23 @@
 pipeline {
-    agent none
-
-    options {
-        buildDiscarder(logRotator(daysToKeepStr: '10'))
-        timestamps()
+   agent {
+        docker {
+            image 'maven:3-alpine' 
+            args '-v /root/.m2:/root/.m2' 
+        }
     }
 
-stages {
-                        stage('Prepare Docker') {
-                            agent {
-                                label "docker && linux"
-                            }
-                            steps {
-                                sh '''
-                                //docker buildx create --use
-                                docker run maven
-                                '''
-                            }
-                        }
-}
+    stages {
+        stage('Checkout') {
+
+            steps {
+               // git branch: "master", url: "repo url", credentialsId: 'id'
+            }
+         }
+
+          stage ("build") {
+              steps {
+                sh 'mvn clean package '
+              }
+        }
+    }
 }
