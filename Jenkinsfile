@@ -7,12 +7,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
 
-            steps {
-               // git branch: "master", url: "repo url", credentialsId: 'id'
-            }
-         }
 
           stage ("build") {
               steps {
