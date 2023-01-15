@@ -1,19 +1,22 @@
 #!groovy
-/*pipeline {
+pipeline {
 	agent none
   stages {
   	stage('Maven Install') {
-    	agent {
-      	docker {
-        	image 'maven:3.5.0'
-        }
+    	//agent {
+      //	docker {
+        //	image 'maven:3.5.0'
+      //  }
       }
       steps {
-      	sh 'mvn clean install'
+      	sh '''
+
+               docker run maven:3.5.0
+         '''
       }
-    }
+   // }
   }
-} */
+} 
 
 
-sh "docker"
+//sh "docker"
