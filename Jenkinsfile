@@ -1,37 +1,49 @@
 pipeline {
-  // Assign to docker agent(s) label, could also be 'any'
-  agent {
-    label 'docker' 
+  environment {
+    registry = "ram/spring-petclinic"
+    registryCredential = 'jforg-reg'
+    dockerImage = ''
   }
-
+  agent any
+  tools {
+    maven 'Maven 3.3.9'
+    jdk 'jdk11'
+  } 
   stages {
-    stage('Docker node test') {
-      agent {
-        docker {
-          // Set both label and image
-          label 'docker'
-          image 'node:7-alpine'
-          args '--name docker-node' // list any args
+    stage('SCM Checkout') {
+      steps {
+        git 'https://github.com/Ramachari787/spring-petclinic.git'
+      }
+    }
+    stage('pckage') {
+       steps {
+         sh 'mvn package'
+       }
+    }
+    stage('To run Test cases') {
+      steps {
+        sh '''
+        mvn clean install
+
+        '''
+      }
+    }
+    stage('Building Image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":latest"
         }
       }
-      steps {
-        // Steps run in node:7-alpine docker container on docker agent
-        sh 'node --version'
+    }
+    stage('Deploy Image') {
+      steps{
+         script {
+            docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
       }
     }
 
-    stage('Docker maven test') {
-      agent {
-        docker {
-          // Set both label and image
-          label 'docker'
-          image 'maven:3-alpine'
-        }
-      }
-      steps {
-        // Steps run in maven:3-alpine docker container on docker agent
-        sh 'mvn --version'
-      }
-    }
   }
-} 
+}
