@@ -1,12 +1,12 @@
 pipeline {
   environment {
-    registry = "ram/spring-petclinic"
+    registry = "ramjfrogdev.jfrog.io"
     registryCredential = 'jforg-reg'
     dockerImage = ''
   }
   agent any
   tools {
-    maven 'Maven 3.3.9'
+    maven 'Maven 3.8.5'
     jdk 'jdk11'
   } 
   stages {
@@ -31,7 +31,7 @@ pipeline {
     stage('Building Image') {
       steps{
         script {
-          dockerImage = docker.build registry + ":latest"
+          dockerImage = docker.build registry + ":1.0.0"
         }
       }
     }
