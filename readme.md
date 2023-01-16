@@ -1,4 +1,4 @@
-### steps to build the code,docker image and deploy into jfrog artifactory. ###
+### Steps to build the code,docker image and deploy into jfrog artifactory. ###
 
 1)Setup the jenkins 2.235 image and installed necessary plugins i:e docker,maven and pipeline
 
