@@ -20,7 +20,8 @@
  >   5. Deploy Image: to push the image we can use dockerImage.push function. with container registry login enabled.
 
 5) To run the docker container in your laptop ,we can use below command.
-   docker run -d --name spring-petclinic -p 8181:8181  ramjfrogdev.jfrog.io/docker/spring-petclinic:1.0.0
+
+   "docker run -d --name spring-petclinic -p 8181:8181  ramjfrogdev.jfrog.io/docker/spring-petclinic:1.0.0"
    NOTE: I have created account with jfrog Docker repo and used my credentilas to deploy the image into docker artifactory.
      
      <img width="1233" alt="image" src="https://user-images.githubusercontent.com/24789782/212741552-b9e1c55d-a7ff-45cd-b9fb-6f19cd6b47f4.png">
